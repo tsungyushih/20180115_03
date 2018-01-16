@@ -1,6 +1,8 @@
 package com.frandog.a20180115_03;
 
+import android.content.Intent;
 import android.content.SharedPreferences;
+import android.preference.PreferenceManager;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
@@ -41,5 +43,17 @@ public class MainActivity extends AppCompatActivity {
         et2 = findViewById(R.id.editText2);
         editor.putString("data2",et2.getText().toString());
         editor.commit();
+    }
+    public void clickSetting(View v)        //新開New/Activity/SettingsActivity(parent要選，表示back時要退回哪一頁)
+    {
+        Intent it = new Intent(MainActivity.this,SettingsActivity.class);
+        startActivity(it);
+    }
+    public void showSetting(View v)
+    {
+        SharedPreferences sp = PreferenceManager.getDefaultSharedPreferences(this);     //去找預設檔案(也可以直接key"Android Device Monitor/data/data/專案名/預設檔名")
+        String str = sp.getString("example_text","");      //可以在res/xml/pref_general.xml看到key的名稱
+        TextView tv = findViewById(R.id.textView2);
+        tv.setText(str);
     }
 }
